@@ -1,0 +1,37 @@
+### REGISTRO ###
+POST http://localhost:3000/auth/register HTTP/1.1
+content-type: application/json
+
+{
+    "nome": "Deividson Santos",
+    "email": "deividson.santos@progen.com.br",
+    "senha": "123456"
+}
+
+### AUTENTICAÇÃO ###
+POST http://localhost:3000/auth/authenticate HTTP/1.1
+content-type: application/json
+
+{
+    "email": "deividson.santos@progen.com.br",
+    "senha": "123456"
+}
+
+### GRAVAR DIÁRIO ###
+POST http://localhost:3000/daily/save HTTP/1.1
+content-type: application/json
+Autorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb2RpZ28iOiI3NDUzNjcyNS0zNDU1LTRhODgtOTc5MC0yZjU1MDlkNWJkMTEiLCJpYXQiOjE1NzMyNDgxOTMsImV4cCI6MTU3MzI1NDE5M30.JkERJXgjQcTNQV3td9D7OyFQbMFXC2_OhYZDhyhPdOc
+
+{
+    "daily": {
+        "teste": "teste",
+        "teste": "teste",
+        "dias": [
+            { "id": 1, "descricao": "segunda" },
+            { "id": 2, "descricao": "terça" },
+            { "id": 3, "descricao": "quarta" },
+            { "id": 4, "descricao": "quinta" },
+            { "id": 5, "descricao": "sexta" }
+        ]
+    }
+}
