@@ -7,6 +7,9 @@ const router = express.Router();
 router.use(authMiddleware);
 
 router.post('/save', async (req, res) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "X-Requested-With");
+    
     const data = new Date();
     const name = `daily_${data.getTime()}`;
 
