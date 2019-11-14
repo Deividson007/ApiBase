@@ -1,27 +1,33 @@
-const jwt = require('jsonwebtoken');
-const authConfig = require('../config/auth.json');
+const jwt = require("jsonwebtoken");
+const authConfig = require("../config/auth.json");
 
 module.exports = (req, res, next) => {
-    const authHeader = req.headers.autorization;
+    let authHeader = ""; 
+    
+    if (req.headers.autorization)
+        authHeader = req.headers.autorization;
 
+    if (req.headers.authorization)
+        authHeader = req.headers.authorization;
+    
     if(!authHeader)
-        return res.status(401).send({ error: 'Token não foi informado' });
+        return res.status(401).send({ error: "Token não foi informado" });
 
-    const parts = authHeader.split(' ');
+    const parts = authHeader.split(" ");
 
     if(!parts.length === 2)
-        return res.status(401).send({ error: 'Erro Token' });
+        return res.status(401).send({ error: "Erro Token" });
     
     const [ scheme, token ] = parts;
 
     if(!/^Bearer$/i.test(scheme))
-        return res.status(401).send({ error: 'Erro no formato do token' });
+        return res.status(401).send({ error: "Erro no formato do token" });
 
     jwt.verify(token, authConfig.secret, (err, decoded) => {
         if(err) 
-            return res.status(401).send({ error: 'Token invalido' });
+            return res.status(401).send({ error: "Token invalido" });
         
-        req.usuario = decoded;
+        req.userId = decoded.id;
         return next();
     });
 };

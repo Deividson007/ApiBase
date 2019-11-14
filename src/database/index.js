@@ -1,5 +1,5 @@
-const { Client, Pool } = require('pg');
-const dbAuth = require('./auth');
+const { Client, Pool } = require("pg");
+const dbAuth = require("./auth");
 
 const pool = new Pool(dbAuth);
 const client = new Client(dbAuth);
